@@ -118,16 +118,19 @@ if __name__ == "__main__":
 
 ### Roo Code 添加 MCP Server
 
-1. ​
-2. ​
-3. ​
-4. ​
+![image](assets/roo_1.png)
+![image](assets/roo_2.png)
+![image](assets/roo_3.png)
+![image](assets/roo_4.png)
+
+
 
 ### WindSurf 添加 MCP Server
 
-1. ​
-2. ​
-3. ​
+![image](assets/wd_1.png)
+![image](assets/wd_2.png)
+![image](assets/wd_3.png)
+
 
 #### 相关引用
 
