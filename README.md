@@ -7,6 +7,7 @@
 ```
 mcp-servers/
 ├── git-options/        # Git 操作相关的 MCP 服务
+├── google-sheet-mcp/   # Google Sheets 和文档操作相关的 MCP 服务
 ├── tutorial/           # 从 0 到 1 的 MCP 开发教程
 └── ...                 # 其他 MCP 服务
 ```
@@ -23,6 +24,15 @@ mcp-servers/
 - 远程仓库操作
 - 凭证管理
 - 用户配置
+
+### Google Sheets MCP 工具
+
+位于 `google-sheet-mcp/` 目录，提供与 Google Sheets 和 Google Docs 交互的 MCP 服务，包括：
+
+- 文档列表查询：列出所有可访问的 Google 文件、表格和文档
+- 文档下载：下载 Google 表格（支持 Excel、CSV、JSON 格式）和文档（支持 DOCX、TXT 格式）
+- 周报更新：查找和更新 Google Sheets 中的周报内容
+- 安全认证：使用 Google 服务账号进行安全认证
 
 ## 从 0 到 1 的 MCP 开发教程
 
