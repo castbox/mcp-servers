@@ -8,6 +8,7 @@
 mcp-servers/
 ├── git-options/        # Git 操作相关的 MCP 服务
 ├── google-sheet-mcp/   # Google Sheets 和文档操作相关的 MCP 服务
+├── jk-option/          # Jenkins 操作相关的 MCP 服务
 ├── tutorial/           # 从 0 到 1 的 MCP 开发教程
 └── ...                 # 其他 MCP 服务
 ```
@@ -33,6 +34,17 @@ mcp-servers/
 - 文档下载：下载 Google 表格（支持 Excel、CSV、JSON 格式）和文档（支持 DOCX、TXT 格式）
 - 周报更新：查找和更新 Google Sheets 中的周报内容
 - 安全认证：使用 Google 服务账号进行安全认证
+
+### Jenkins 操作工具
+
+位于 `jk-option/` 目录，提供 Jenkins 服务器的各种操作功能，包括：
+
+- 获取所有 Jenkins 项目列表
+- 获取指定项目的构建参数
+- 根据传入的参数触发构建
+- 获取构建状态
+- 终止指定构建
+- 项目别名处理功能（例如将完整项目名映射为简短别名）
 
 ## 从 0 到 1 的 MCP 开发教程
 
