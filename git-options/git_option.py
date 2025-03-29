@@ -120,5 +120,87 @@ async def git_config_user(path: str, name: str, email: str) -> str:
     email_result = run_git_command(['config', '--global', 'user.email', email], path)
     return f"用户名设置: {name_result}\n邮箱设置: {email_result}"
 
+@mcp.tool()
+async def git_log(path: str, num_entries: int = 5) -> str:
+    """查看提交历史"""
+    return run_git_command(['log', f'-n{num_entries}', '--oneline'], path)
+
+@mcp.tool()
+async def git_log_advanced(path: str, author: str = None, since: str = None, until: str = None, 
+                         grep: str = None, format: str = "%h %ad %s", date_format: str = "short", 
+                         num_entries: int = None) -> str:
+    """高级查看提交历史
+    
+    参数:
+        path: 仓库路径
+        author: 作者名称或邮箱，例如 "yuzhou"
+        since: 开始时间，例如 "1 week ago", "2023-01-01"
+        until: 结束时间，例如 "yesterday", "2023-12-31"
+        grep: 在提交信息中搜索的关键词
+        format: 输出格式，默认为 "%h %ad %s"（哈希值、日期、提交信息）
+        date_format: 日期格式，可选值包括 "short", "relative", "iso", "local" 等
+        num_entries: 显示的条目数量，不设置则显示全部
+    """
+    command = ['log']
+    
+    if author:
+        command.append(f'--author="{author}"')
+    
+    if since:
+        command.append(f'--since="{since}"')
+    
+    if until:
+        command.append(f'--until="{until}"')
+    
+    if grep:
+        command.append(f'--grep="{grep}"')
+    
+    if format:
+        command.append(f'--pretty=format:"{format}"')
+    
+    if date_format:
+        command.append(f'--date={date_format}')
+    
+    if num_entries:
+        command.append(f'-n{num_entries}')
+    
+    return run_git_command(command, path)
+
+@mcp.tool()
+async def git_diff(path: str, commit1: str = None, commit2: str = None, file_path: str = None, cached: bool = False) -> str:
+    """查看差异
+    
+    参数:
+        path: 仓库路径
+        commit1: 第一个提交或分支，不指定则与当前工作区比较
+        commit2: 第二个提交或分支，不指定则与第一个提交比较
+        file_path: 指定文件路径，不指定则比较所有文件
+        cached: 是否比较暂存区和最新提交，默认为False
+    
+    返回:
+        str: diff结果文本
+    """
+    command = ['diff']
+    
+    # 比较暂存区和最新提交
+    if cached:
+        command.append('--cached')
+    
+    # 指定提交或分支进行比较
+    if commit1 and commit2:
+        command.append(f'{commit1}..{commit2}')
+    elif commit1:
+        command.append(commit1)
+    
+    # 指定文件路径
+    if file_path:
+        command.append('--')
+        command.append(file_path)
+    
+    # 添加颜色输出
+    command.append('--color')
+    
+    return run_git_command(command, path)
+    
 if __name__ == "__main__":
     mcp.run(transport='stdio')
